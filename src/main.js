@@ -1,15 +1,5 @@
 function setValue(elm, value) {
   elm.innerHTML = value < 10 ? `0${value}` : value;
-  const parent = elm.parentElement;
-  if (value <= 0) {
-    if (parent.classList.contains("opacity-50")) {
-      return;
-    }
-
-    parent.classList.add("opacity-50");
-  } else if (parent.classList.contains("opacity-50")) {
-    parent.classList.remove("opacity-50");
-  }
 }
 
 function setCounter(endDate) {

@@ -1,0 +1,15 @@
+{
+  "name": "countdown-timer",
+  "version": "1.0.0",
+  "description": "count down to a selected time",
+  "repository": "https://github.com/iconic95/countdownTimer.git",
+  "author": "yasharzolmajdi <yashar.zolmajdi@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-clean-dir": "^1.0.2",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-minify": "^3.1.0"
+  }
+}
