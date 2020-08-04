@@ -34,9 +34,13 @@ function setCounter(endDate) {
 function init() {
   const targetElm = document.getElementById("target");
 
+  const currentDate = new Date();
   const endDate = new Date();
   endDate.setDate(29);
   endDate.setMonth(8);
+  if (currentDate > endDate) {
+    endDate.setFullYear(endDate.getFullYear() + 1);
+  }
 
   targetElm.innerHTML = endDate.toString();
   setInterval(function () {
