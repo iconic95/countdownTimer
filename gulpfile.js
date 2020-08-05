@@ -3,6 +3,7 @@ const htmlmin = require("gulp-htmlmin");
 const minify = require("gulp-minify");
 const cleanDir = require("gulp-clean-dir");
 const cleanCSS = require("gulp-clean-css");
+const critical = require("critical").stream;
 
 function clean() {
   return src("dist").pipe(cleanDir("dist"));
@@ -33,4 +34,31 @@ function compressCSS() {
     .pipe(dest("dist"));
 }
 
-exports.default = series(clean, parallel(minifyHTML, compressJS, compressCSS));
+function criticalGen() {
+  return src("dist/*.html")
+    .pipe(
+      critical({
+        base: "dist/",
+        inline: true,
+        css: ["dist/styles.css"],
+      })
+    )
+    .on("error", (err) => {
+      log.error(err.message);
+    })
+    .pipe(dest("dist"));
+}
+
+function copyFavicon() {
+  return src("./src/favicon/*").pipe(dest("./dist/favicon"));
+}
+
+function copyManifest() {
+  return src("./src/site.webmanifest").pipe(dest("./dist"));
+}
+
+exports.default = series(
+  clean,
+  parallel(minifyHTML, compressJS, compressCSS, copyFavicon, copyManifest),
+  criticalGen
+);
